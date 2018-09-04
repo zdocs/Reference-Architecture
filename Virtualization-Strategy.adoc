@@ -6,5 +6,7 @@ http://wiki.zimbra.com/wiki/Performance_Recommendations_for_Virtualizing_Zimbra_
 == Memory Allocation
 
 Memory performance is affected by the processor/memory architecture provided by your hardware vendor. Some vendors create NUMA (Non Uniform Memory Access) boundaries that assign 8 GB of RAM per processor, while others may have a NUMA boundary at 12 GB per processor.
+
 MTA/Proxy servers can usually function well with as little as 8 GB of RAM for all of the usage scenarios defined, but they function better with more memory. Mailbox servers that are also running LDAP services as shown should have a minimum of 16 GB of RAM and will require as much as 32 GB of RAM for the heavy usage scenario.  
+
 If possible, allocate processors and memory along NUMA boundaries for each virtual machine. For example, if your hardware architecture has NUMA boundaries at 12 GB per processor, you might allocate 2 processors with 12 GB of RAM for each MTA/Proxy and 2 processors with 24 GB of RAM for your LDAP/Mailbox server. For a hardware architecture with NUMA boundaries at 8 GB, you might allocate 2 processors with 8 GB of RAM for each MTA/proxy server and 2 processors with 32 GB of RAM for your mailbox server.
