@@ -10,7 +10,7 @@ Customer should use Hierarchical Storage Management (HSM) in Zimbra. Secondary m
 
 While SAN performance varies with the amount of cache allocated to volume groups, a minimum number of spindles should be allocated to the volume groups used for the mailbox server in order to ensure adequate performance during normal loads.
 
-=== Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)	table
+=== Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)	Table
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
@@ -22,7 +22,7 @@ While SAN performance varies with the amount of cache allocated to volume groups
 
 Since backups can represent high IOPs requirements and must be completed during non-business hours, adequate IOPs capacity (disk spindles) must be allocated to the backup partitions. The backup partition should be on a separate physical SAN environment or physical RAID group.
 
-=== Minimum Number of Disk Spindles for Backup Partition (/opt/zimbra/backup)	table
+=== Minimum Number of Disk Spindles for Backup Partition (/opt/zimbra/backup)	Table
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
@@ -56,7 +56,7 @@ Additional Disk Space must be allocated for OS files, ZCS, and log files. All OS
 
 The following table shows estimated disk requirements for the MTA/Proxy Servers. 
 
-=== MTA/Proxy Storage table
+=== MTA/Proxy Storage Table
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
@@ -65,7 +65,7 @@ The following table shows estimated disk requirements for the MTA/Proxy Servers.
 |Est. Spool Size Requirements Per Day (GB) Per MTA	|30	         |45	         |60
 |                                                   |OS/ZCS/Logs |             |		
 |Est. Other Requirements Per MTA (GB)	              |30	         |45	         |60
-|*Total Disk Space Recommended Per MTA*             |*60	       |*90	         |*120
+|*Total Disk Space Recommended Per MTA*             |*60*	       |*90*	       |*120*
 |===
 
 == Mail Store
