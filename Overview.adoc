@@ -1,4 +1,5 @@
 = Overview
+
 == Introduction and Scope
 
 This technical white paper describes the architecture for a Zimbra Collaboration Suite (ZCS) implementation based on typical usage patterns for Small to Medium Business (SMB) customers with approximately 1,000 users. It should not be used to extrapolate to larger deployments or beyond the parameters show in Table 1 of the Sizing Assumptions.  The configurations shown will work for physical and virtual server deployments. However, Zimbra recommends a virtualized deployment using vSphere for the SMB customer.
