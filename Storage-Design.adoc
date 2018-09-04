@@ -81,6 +81,21 @@ RAID 1 or RAID 1+0 is recommended for all partitions except the backup partition
 
 Important: DO NOT use direct NFS file systems for the db (mysql data) or /opt/zimbra/data (where LDAP data is stored) directories. You WILL experience data corruption eventually if you use NFS for these. You may use vmdk filesystems mounted over NFS partitions with vSphere since the disk subsystem behaves as a block based device to the OS.
 
+=== Mailstore Storage (MB) Table
+
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Criteria	                                         |Light	  |Medium	  |Heavy
+|/opt/zimbra	                                     |50	    |50	      |50
+|/opt/zimbra/store	                               |120	    |370	    |880
+|/opt/zimbra/store2	                               |670	    |2080	    |4990
+|/opt/zimbra/db	                                   |40	    |130	    |300
+|/opt/zimbra/index	                               |200	    |620	    |1470
+|/opt/zimbra/redolog	                             |80	    |250	    |590
+|/opt/zimbra/backup (separate physical hardware)	 |1630	  |5080	    |12190
+|*Total*                                           |*2790*	|*8580*	  |*20470*
+|===
+
 == Archive Store (Optional)
 Since Archiving is simply a message repository and does not support day-to-day user activity, separation of disk partitions is not necessary. The calculations here assume 365 days of data stored on the archive server. RAID 5 can be used on slower disks.
 
