@@ -114,7 +114,7 @@ Technology used in the Zimbra Web Client.
 
 *SSL*: Secure Sockets Layer.
 
-*Tags: A Zimbra Web Client feature. Users can define tags and apply them to mail messages for searching.
+*Tags*: A Zimbra Web Client feature. Users can define tags and apply them to mail messages for searching.
 
 *TLS*: Transport Layer Security.
 
