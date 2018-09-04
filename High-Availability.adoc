@@ -1,0 +1,13 @@
+= High Availability Considerations
+
+== LDAP Servers
+ZCS requires a customized implementation OpenLDAP for directory Services. The version of OpenLDAP installed with Zimbra supports a Master/Replica Model. All writes to the directory must occur on the LDAP master. Writes are then pushed automatically to the LDAP replicas, which can be read by any Zimbra service. The customer’s implementation may include one master and optionally an LDAP replica server (if an archive server is installed separately), each installed as services on the mailbox servers and the archive server. 
+In the event of a failure of the LDAP master, normal read operations of the directory will provide uninterrupted access to Zimbra users for basic operations. Operations that will be limited include password changes, configuration changes to domains, class of services, or accounts. If the LDAP Master is unrecoverable, customer’s IT staff will need to promote the LDAP replica to master status and rebuild a new LDAP replica. Zimbra has posted instructions for promoting an LDAP replica to an LDAP master here:
+http://wiki.zimbra.com/index.php?title=Promoting_Replica_to_LDAP_Master 
+
+== Proxy/MTA Servers
+Proxy and MTA servers do not maintain long-term data during normal operations. While a single server is capable of handling the traffic based on the stated assumptions and the projected load for 1,000 users, two servers should be configured as VMware guest servers on separate physical hardware for this deployment to provide higher availability for overall operations. The affinity rules should be configured in vSphere to prevent both servers from being on the same host. Access to the services will be provided using the load balancer. A single server can therefore be down and services should continue uninterrupted. If performance monitoring indicates excessive load after appropriate tuning, customer may choose to add an additional virtual server for increased capacity.
+
+== Mailbox Servers
+While ZCS supports clustering with tools such as the RedHat Cluster Services and Veritas Clustering, a clustered solution adds complexity to the environment and does not protect against the most common hardware outage of disk failures. The Zimbra Mailbox and optional archive servers should not be implemented as a cluster; however, they should be configured as vSphere guest servers and subject to management utilizing vSphere such as VMware HA and DRS. High Availability for data can be achieved utilizing SAN based replication of the file systems to an alternate site.  
+Note: The configuration of SAN based replication is beyond the scope of this project and should be addressed separately.
