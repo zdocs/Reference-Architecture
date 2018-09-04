@@ -2,10 +2,10 @@
 
 The Glossary lists terms and acronyms used in this document, and includes both industry terms and application-specific terms.
 
-A record: A (Address) records map the hostname to the numeric IP address. For Zimbra,
+*A record*: A (Address) records map the hostname to the numeric IP address. For Zimbra,
 the A record is the IP address for the zimbra server.
 
-Account Policy: Class of Service as exposed in Zimbra administration console.
+*Account Policy*: Class of Service as exposed in Zimbra administration console.
 
 AD: Microsoft Active Directory Server. Used in Zimbra as an optional choice for authentication and GAL, along with OpenLDAP for all other Zimbra functions.
 
