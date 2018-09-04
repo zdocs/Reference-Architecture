@@ -29,14 +29,14 @@ For the recommended configuration, MTA and Proxy services are located in a secur
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
-|Function	                                                   |Port
-|SMTP to MTA from external mail servers                      |25
-|Connect to Zimbra Mail (if SSL offloaded by Load Balancer)	 |80
-|POP to Proxy server	                                       |110
-|IMAP to Proxy Server	                                       |143
-|Connect to Zimbra Mail over HTTPS                           |443
-|IMAP SSL	                                                   |993
-|POP SSL	                                                   |995
+|Function	                                                   |Port |
+|SMTP to MTA from external mail servers                      |25   |
+|Connect to Zimbra Mail (if SSL offloaded by Load Balancer)	 |80   |
+|POP to Proxy server	                                       |110  |
+|IMAP to Proxy Server	                                       |143  |
+|Connect to Zimbra Mail over HTTPS                           |443  |
+|IMAP SSL	                                                   |993  |
+|POP SSL	                                                   |995  |
 |===
 
 Bidirectional between DMZ servers (Proxy/MTA) and Internal Servers (LDAP, Mailbox)
