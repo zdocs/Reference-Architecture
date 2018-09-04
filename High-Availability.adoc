@@ -3,6 +3,7 @@
 == LDAP Servers
 ZCS requires a customized implementation OpenLDAP for directory Services. The version of OpenLDAP installed with Zimbra supports a Master/Replica Model. All writes to the directory must occur on the LDAP master. Writes are then pushed automatically to the LDAP replicas, which can be read by any Zimbra service. The customer’s implementation may include one master and optionally an LDAP replica server (if an archive server is installed separately), each installed as services on the mailbox servers and the archive server. 
 In the event of a failure of the LDAP master, normal read operations of the directory will provide uninterrupted access to Zimbra users for basic operations. Operations that will be limited include password changes, configuration changes to domains, class of services, or accounts. If the LDAP Master is unrecoverable, customer’s IT staff will need to promote the LDAP replica to master status and rebuild a new LDAP replica. Zimbra has posted instructions for promoting an LDAP replica to an LDAP master here:
+
 http://wiki.zimbra.com/index.php?title=Promoting_Replica_to_LDAP_Master 
 
 == Proxy/MTA Servers
