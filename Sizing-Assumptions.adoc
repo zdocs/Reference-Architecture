@@ -1,0 +1,32 @@
+= Sizing Assumptions
+
+== Overview
+
+There are many factors that determine the performance of an email and collaboration deployment.  Inadequate hardware sizing that delivers poor performance can be addressed by adding more servers since the architecture is designed to be scalable. However, it is better to address the issues in the initial design.
+The items that impact performance include:
+
+*	Number of users during peak utilization
+*	Number of messages sent and received
+*	Size of messages sent and received
+*	Allocated Mailbox size and usage
+*	IOPS performance of the disk subsystem
+*	Memory Configuration
+*	Type of client connecting to the system
+
+Note: When using this document as a guide, be careful to compare your actual usage values with the assumptions contained here. 
+
+== Users and Mailbox Sizes
+In an average SMB, while there may be 1,000 users, some portion of those email accounts are not being used (active vs. inactive accounts).  Also, at any point in time, there may be less than 50% of the users currently accessing the system (concurrent users).
+While mailbox quotas may be set at 5 GB, most users do not use the entire allocated space.  Multiplying the quota by the average utilization gives the average mailbox size.  Higher quotas or higher utilization rates will require more disk space for primary storage and backups. Mailbox sizes have a small impact on day-to-day performance as noted by the client, but mailbox sizes do impact the amount of time required to complete backups.  If your organization uses lower mailbox quotas, less disk space will be required on the Mailbox server.
+
+=== SMTP
+SMTP (Simple Mail Transfer Protocol) functionality can be provided with the ZCS MTA service using Postfix or an external MTA service. Along with MTA services, ZCS can provide primary anti-virus and anti-spam functionality for the customer’s messaging environment or it can be provided for inbound email from the Internet by external commercial solutions.  All inbound mail to the environment will flow from the spam filtering device or the Zimbra MTA and be routed to users in the Zimbra environment.  
+For the average SMB, message delivery is typically distributed during the workday in North America.  However, to calculate the MTA load, assume that peak message delivery occurs during a two hour interval.
+In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti-spam services.
+
+=== POP
+POP traffic has a relatively small impact on performance of the ZCS environment. If messages are stored locally by the POP client and not on the server, the amount of required disk space would be reduced and the length of time required for backups would be reduced.
+
+ 
+=== IMAP
+IMAP can have a significant impact on the ZCS environment, particularly the amount of memory that should be allocated for mysql.  A single mailbox server with 32 GB of RAM will be able to support the message volumes listed here for heavy usage.
