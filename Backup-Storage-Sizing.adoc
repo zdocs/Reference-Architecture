@@ -1,5 +1,9 @@
 = Backup Storage Sizing
+
 Most customers require the ability to restore messages up to 30 days old from backup. This means there should be up to 5 weeks of email data.
+
 Zimbra does what is effectively a differential backup in order to achieve the functionality of a full backup. A "differential" backup works by hard linking message files that were already backed up in a previous backup and only copying new message files. So each full backup directory is self-contained, and the total number of copies of messages in the backup at any time is 1, irrespective of the number of Full Backups that are being retained.
+
 Size of full backup = size of primary store + size of secondary store + size of MySQL db + size of Index.  It will grow at the exact same rate as the live data.  
+
 The total size required for backups is estimated in tables 3 and 4 for the mailbox and archive server in the row shown as /opt/zimbra/backup.
