@@ -9,3 +9,5 @@ The proxy service will offload SSL traffic and proxy all HTTP, POP, and IMAP tra
 The Zimbra LDAP services will provide configuration information required to run the Zimbra Collaboration Suite.  Authentication Services can be provided by the Zimbra LDAP service, the customer’s Active Directory domain controllers, or an external LDAP service on a per domain basis. 
 
 The Mailbox Servers store email, calendar, address book, documents, and briefcase for each user. The Zimbra LDAP Servers, Mailbox Store Servers, and the Blackberry Enterprise Server (if required) will reside in the customer’s Internal Security Zone. 
+
+image::images/Server-Configuration-and-Placement[Server Configuration and Placement]
