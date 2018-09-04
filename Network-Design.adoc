@@ -10,12 +10,16 @@ The Host file for all the servers should include entries for all the ZCS servers
 == External Connectivity – Load Balancer
 Load Balancers can manage connectivity to multiple Zimbra MTA/Proxy servers to improve uptime and distribute workloads in the ZCS deployment. Typically, a customer will create one or more A records that point to a Load Balancer IP address that represents the different network services offered by Zimbra such as POP3, IMAP, HTTPS, or SMTP. If you choose not to deploy a load balancer, you can use round-robin DNS with the A record pointing to each Zimbra MTA/Proxy server. This may result in a perception of downtime if one of the MTA/Proxy servers is taken offline for maintenance. The table below shows several examples of how customers may name the services they offer. A simple version of this would be to have all services reference the same name such as mail.customer.com.
 
-Service Name	Process	Virtual IP:Port	Target Hosts
+=== Load Balancer Configuration Table
 
-webmail.customer.com	HTTPS	xxx.xxx.xxx.xxx:443	IP Address of Proxies
-pop.customercom	POP3	xxx.xxx.xxx.xxx:110	IP Address of Proxies
-imap.customer.com	IMAPS	xxx.xxx.xxx.xxx:993	IP Address of Proxies
-smtp.customer.com	SMTP	xxx.xxx.xxx.xxx:25	IP Address of Proxies
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Service Name	         |Process	|Virtual IP:Port	    |Target Hosts
+|webmail.customer.com	 |HTTPS	  |xxx.xxx.xxx.xxx:443	|IP Address of Proxies
+|pop.customercom	     |POP3	  |xxx.xxx.xxx.xxx:110	|IP Address of Proxies
+|imap.customer.com	   |IMAPS	  |xxx.xxx.xxx.xxx:993	|IP Address of Proxies
+|smtp.customer.com	   |SMTP	  |xxx.xxx.xxx.xxx:25	  |IP Address of Proxies
+|===
 
 == Firewall Port Configuration
 
