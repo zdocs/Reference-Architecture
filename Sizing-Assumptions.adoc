@@ -35,27 +35,27 @@ IMAP can have a significant impact on the ZCS environment, particularly the amou
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
-|Criteria                 |Light  |Medium |Heavy|
+|Criteria                 |Light  |Medium |Heavy
 |Users                    |       |       |
-|Total Users              |1000   |1000   |1000|
-|Active Users             |600    |750    |900|
-|Concurrent Users         |300    |500    |700|
-| == Mailboxes            |       |       |
+|Total Users              |1000   |1000   |1000
+|Active Users             |600    |750    |900
+|Concurrent Users         |300    |500    |700
+|Mailboxes                |       |       |
 |Mailbox Quota (GB)       |2      |5      |10
-|Avg. Mailbox Utilization |40%	  |50%    |60%
-|Avg. Mailbox Size (GB)   |0.8	  |2.5    |6.0
+|Avg. Mailbox Utilization |40%	   |50%    |60%
+|Avg. Mailbox Size (GB)   |0.8	   |2.5    |6.0
 |Incoming Mail            |       |       |		
-|Average Msg. Size (KB)   |100	  |175	  |250
-|Msgs Per User Per Day    |25	  |50	  |75
+|Average Msg. Size (KB)   |100	   |175	   |250
+|Msgs Per User Per Day    |25	    |50	    |75
 |Outgoing Mail            |       |       |	
-|Avg. Msg. Size (KB)      |100	  |175	  |250
-|Msgs Per User Per Day    |50	  |75	  |100
+|Avg. Msg. Size (KB)      |100	   |175	   |250
+|Msgs Per User Per Day    |50	    |75	    |100
 |Peak Period              |       |       |		
-|Peak Period (minutes)    |120	  |120    |120
-|% Msgs delivered         |30%    |50%	  |80%
+|Peak Period (minutes)    |120	   |120    |120
+|% Msgs delivered         |30%    |50%	   |80%
 |Client Access Methods    |       |       |		
-|Webmail, ZCO	          |95%	  |95%	  |95%
-|POP	                  |10%	  |10%	  |10%
-|IMAP	                  |10%	  |25%	  |50%
-|Mobile	                  |10%	  |25%	  |40%
+|Webmail, ZCO	            |95%	   |95%	   |95%
+|POP	                     |10%	   |10%	   |10%
+|IMAP	                    |10%	   |25%	   |50%
+|Mobile	                  |10%	   |25%	   |40%
 |===
