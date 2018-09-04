@@ -23,34 +23,40 @@ Load Balancers can manage connectivity to multiple Zimbra MTA/Proxy servers to i
 
 == Firewall Port Configuration
 
-For the recommended configuration, MTA and Proxy services are located in a security zone that is exposed to the Internet and must handle connectivity to the outside world, typically called a DMZ. 
+For the recommended configuration, MTA and Proxy services are located in a security zone that is exposed to the Internet and must handle connectivity to the outside world, typically called a DMZ. LDAP, Mailbox, Archiving, and BES services are usually located inside the trusted corporate network (trusted). The following tables show the ports that must be opened from the outside to the DMZ and between the DMZ and trusted networks. Connecting from the Outside (Internet) to the DMZ (Proxy/MTA)
 
-LDAP, Mailbox, Archiving, and BES services are usually located inside the trusted corporate network (trusted). The following tables show the ports that must be opened from the outside to the DMZ and between the DMZ and trusted networks. Connecting from the Outside (Internet) to the DMZ (Proxy/MTA)
+=== Internet to DMZ Firewall Ports Table	
 
-=== Internet to DMZ Firewall Ports Table		
-Function	Port
-SMTP to MTA from external mail servers	25
-Connect to Zimbra Mail (if SSL offloaded by Load Balancer)	80
-POP to Proxy server	110
-IMAP to Proxy Server	143
-Connect to Zimbra Mail over HTTPS 	443
-IMAP SSL	993
-POP SSL	995
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Function	                                                   |Port
+|SMTP to MTA from external mail servers                      |25
+|Connect to Zimbra Mail (if SSL offloaded by Load Balancer)	 |80
+|POP to Proxy server	                                       |110
+|IMAP to Proxy Server	                                       |143
+|Connect to Zimbra Mail over HTTPS                           |443
+|IMAP SSL	                                                   |993
+|POP SSL	                                                   |995
+|===
 
 Bidirectional between DMZ servers (Proxy/MTA) and Internal Servers (LDAP, Mailbox)
 
 === DMZ to Trusted Firewall Ports Table	
-Function	Port
-SSH for Remote Server logs/Management	22
-SMTP from Mailbox server to MTA’s	25
-MTA to LDAP Authentication	389
-Syslogd from MTA to Mailbox server udp	514
-LMTP from MTA's to Mailbox Servers	7025
-Zimbra Administration	7071
-Zimbra Route Lookups (from Proxy to Mailbox)	7072
-Pop Proxy to Mailbox Servers	7110
-IMAP Proxy to Mailbox Servers	7143
-IMAP Proxy to Mailbox Servers (SSL)	7993
-POP Proxy to Mailbox Servers (SSL) 	7995
+
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Function	                                    |Port
+|SSH for Remote Server logs/Management	      |22
+|SMTP from Mailbox server to MTA’s	          |25
+|MTA to LDAP Authentication	                  |389
+|Syslogd from MTA to Mailbox server udp	      |514
+|LMTP from MTA's to Mailbox Servers	          |7025
+|Zimbra Administration	                      |7071
+|Zimbra Route Lookups (from Proxy to Mailbox)	|7072
+|Pop Proxy to Mailbox Servers	                |7110
+|IMAP Proxy to Mailbox Servers	              |7143
+|IMAP Proxy to Mailbox Servers (SSL)          |7993
+|POP Proxy to Mailbox Servers (SSL) 	        |7995
+|===
 
 *Note*: BES servers will need connectivity outbound to Blackberry Infrastructure on port 3101 and connect to VIP (mail.customer.com, which forwards to proxy server) on 80 or 443.
