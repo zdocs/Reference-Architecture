@@ -63,7 +63,8 @@ The following table shows estimated disk requirements for the MTA/Proxy Servers.
 |Criteria	                                          |Light	     |Medium	     |Heavy
 |                                                   |Spool       |             |	
 |Est. Spool Size Requirements Per Day (GB) Per MTA	|30	         |45	         |60
-|                                                   |OS/ZCS/Logs		
+
+|                                                   |OS/ZCS/Logs |             |		
 |Est. Other Requirements Per MTA (GB)	              |30	         |45	         |60
 |Total Disk Space Recommended Per MTA	              |60	         |90	         |120
 |===
