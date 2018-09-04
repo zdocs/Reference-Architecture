@@ -31,10 +31,11 @@ POP traffic has a relatively small impact on performance of the ZCS environment.
 === IMAP
 IMAP can have a significant impact on the ZCS environment, particularly the amount of memory that should be allocated for mysql.  A single mailbox server with 32 GB of RAM will be able to support the message volumes listed here for heavy usage.
 
-Table 1: Sizing Data			
-| Criteria	| Light	| Medium	| Heavy |
-| -------- | ----- | ------ | ----- |
-Total Users	1000	1000	1000
+Table 1: Sizing Data
+
+| Criteria	| Light	| Medium | Heavy |
+| ------------- | ----- | ------ | ----- |
+| Total Users   | 1000	1000	1000
 Active Users	600	750	900
 Concurrent Users 	300	500	700
 	Mailboxes		
