@@ -99,3 +99,11 @@ Important: DO NOT use direct NFS file systems for the db (mysql data) or /opt/zi
 == Archive Store (Optional)
 Since Archiving is simply a message repository and does not support day-to-day user activity, separation of disk partitions is not necessary. The calculations here assume 365 days of data stored on the archive server. RAID 5 can be used on slower disks.
 
+=== Archive Storage (MB) Table
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Criteria	                                        |Light	  |Medium	   |Heavy			
+|/opt/zimbra	                                    |3617	    |10212	   |22034
+|/opt/zimbra/backup (separate physical hardware)	|3609	    |10205	   |22027
+|*Total*                                          |*7226*	  |*20417*	 |*44061*
+|===
