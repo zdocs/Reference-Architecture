@@ -1,0 +1,11 @@
+= Network Design
+
+== Mail Flow
+
+Mail flow for customers with an external spam filtering system is shown below:
+
+== Host File
+The Host file for all the servers should include entries for all the ZCS servers. 
+
+== External Connectivity – Load Balancer
+Load Balancers can manage connectivity to multiple Zimbra MTA/Proxy servers to improve uptime and distribute workloads in the ZCS deployment. Typically, a customer will create one or more A records that point to a Load Balancer IP address that represents the different network services offered by Zimbra such as POP3, IMAP, HTTPS, or SMTP. If you choose not to deploy a load balancer, you can use round-robin DNS with the A record pointing to each Zimbra MTA/Proxy server. This may result in a perception of downtime if one of the MTA/Proxy servers is taken offline for maintenance. The table below shows several examples of how customers may name the services they offer. A simple version of this would be to have all services reference the same name such as mail.customer.com
