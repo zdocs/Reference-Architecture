@@ -56,6 +56,18 @@ Additional Disk Space must be allocated for OS files, ZCS, and log files. All OS
 
 The following table shows estimated disk requirements for the MTA/Proxy Servers. 
 
+=== MTA/Proxy Storage
+
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Criteria	                                          |Light	     |Medium	     |Heavy
+|                                                   |Spool       |             |	
+|Est. Spool Size Requirements Per Day (GB) Per MTA	|30	         |45	         |60
+|                                                   |OS/ZCS/Logs		
+|Est. Other Requirements Per MTA (GB)	              |30	         |45	         |60
+|Total Disk Space Recommended Per MTA	              |60	         |90	         |120
+|===
+
 == Mail Store
 
 Mailbox server storage can be created on a single partition (/opt/zimbra) or on multiple partitions. The benefit of having it on multiple partitions is that you are able to customize the configuration (RAID levels, file system types, etc.) based on optimization requirements, and the Zimbra Stats can provide detailed information by partition used in troubleshooting potential performance bottlenecks. The minimum partition segregation should at least be /opt/zimbra and /opt/zimbra/backup with the backup partition on separate physical hardware.
