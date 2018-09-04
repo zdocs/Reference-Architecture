@@ -48,7 +48,7 @@ include::Client-Functionality.adoc[]
 
 <<<
 
-include::Glosary.adoc[]
+include::Glossary.adoc[]
 
 <<<
 
