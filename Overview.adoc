@@ -5,7 +5,6 @@
 This technical white paper describes the architecture for a Zimbra Collaboration Suite (ZCS) implementation based on typical usage patterns for Small to Medium Business (SMB) customers with approximately 1,000 users. It should not be used to extrapolate to larger deployments or beyond the parameters show in Table 1 of the Sizing Assumptions.  The configurations shown will work for physical and virtual server deployments. However, Zimbra recommends a virtualized deployment using vSphere for the SMB customer.
 
 This document does not cover detailed:
-
 *	OS level selection or configuration.
 *	Storage Area Network (SAN) configuration.
 * Vendor-specific requirements with hardware. Integration requirements are discussed for a Split Domain configuration, but other integration requirements such as provisioning; application SMTP connectivity, etc. are not discussed.
@@ -17,7 +16,6 @@ A highly available, cost effective infrastructure for email and collaboration ca
 Most Small-to-Medium Businesses today do not require archiving solutions. However, Archiving has been included in this architecture to demonstrate how it can be easily added to support litigation hold or discovery requirements.
 
 The ZCS deployment is for the following solution requirements:
-
 * Email, Address Book, Calendar, and Shared Documents and Folders.
 * Easy scalability.
 * Utilization of High Availability through vSphere and redundant services.
