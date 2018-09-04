@@ -10,4 +10,4 @@ The Zimbra LDAP services will provide configuration information required to run 
 
 The Mailbox Servers store email, calendar, address book, documents, and briefcase for each user. The Zimbra LDAP Servers, Mailbox Store Servers, and the Blackberry Enterprise Server (if required) will reside in the customer’s Internal Security Zone. 
 
-image::images/Server-Configuration-and-Placement[Server Configuration and Placement]
+image::images/Server-Configuration-and-Placement.png[Server Configuration and Placement]
