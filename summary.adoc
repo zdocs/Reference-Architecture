@@ -9,7 +9,7 @@
 :experimental:
 
 = {document-title}
-Reference Architecture Summary
+Reference Architecture
 
 <<<
 
@@ -21,7 +21,7 @@ include::Sizing-Assumptions.adoc[]
 
 <<<
 
-include::Hardware-Cofiguration.adoc[]
+include::Hardware-Configuration.adoc[]
 
 <<<
 
@@ -30,6 +30,34 @@ include::Virtualization-Strategy.adoc[]
 <<<
 
 include::Storage-Design.adoc[]
+
+<<<
+
+include::Network-Design.adoc[]
+
+<<<
+
+include::High-Availability.adoc[]
+
+<<<
+
+include::Backup-Storage-Sizing.adoc[]
+
+<<<
+
+include::Archiving.adoc[]
+
+<<<
+
+include::Integration.adoc[]
+
+<<<
+
+include::Client-Functionality.adoc[]
+
+<<<
+
+include::Glosary.adoc[]
 
 <<<
 
