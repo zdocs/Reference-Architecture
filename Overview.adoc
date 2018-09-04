@@ -1,7 +1,8 @@
-Overview
-1.1	Introduction and Scope
+[[Overview]]
+= Overview
+== Introduction and Scope
 This technical white paper describes the architecture for a Zimbra Collaboration Suite (ZCS) implementation based on typical usage patterns for Small to Medium Business (SMB) customers with approximately 1,000 users. It should not be used to extrapolate to larger deployments or beyond the parameters show in Table 1 of the Sizing Assumptions.  The configurations shown will work for physical and virtual server deployments. However, Zimbra recommends a virtualized deployment using vSphere for the SMB customer.  
-This document does not cover detailed: 
+This document does not cover detailed:
 •	OS level selection or configuration
 •	Storage Area Network (SAN) configuration 
 •	Vendor-specific requirements with hardware. Integration requirements are discussed for a Split Domain configuration, but other integration requirements such as provisioning; application SMTP connectivity, etc. are not discussed.
@@ -17,11 +18,12 @@ Installations of Zimbra in the SMB range may require support of split domain mai
 •	The Split Domain configuration for email delivery enables email users in a single domain to reside on different email systems and allows for incremental migrations from a legacy platform to a new platform. During the migration process, one system is designated as the “primary” mail store and is responsible for receiving and routing mail for the domain (zm-train.com). The other system is considered the “secondary” mail store.  Split domain configuration and migration tools are covered elsewhere.
 •	“Flash-cut” refers to moving all users from the legacy environment to Zimbra during the shortest time frame possible.
 
-1.2	Intended Audience
+== Intended Audience
 This document is intended to be used by: 
 •	IT System Administrators with advanced-level Messaging experience
 •	Zimbra Partners
-1.3	Services to Be Deployed
+
+== Services to Be Deployed
 In most cases, services deployed on legacy email platforms must be supported on Zimbra. While not all deployments require all services, this architecture assumes you will need to support the following:
 •	HTTPS
 •	POP3
