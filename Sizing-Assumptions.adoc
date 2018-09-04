@@ -31,7 +31,7 @@ POP traffic has a relatively small impact on performance of the ZCS environment.
 === IMAP
 IMAP can have a significant impact on the ZCS environment, particularly the amount of memory that should be allocated for mysql.  A single mailbox server with 32 GB of RAM will be able to support the message volumes listed here for heavy usage.
 
-=== Sizing Data
+=== Sizing Data Table
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
@@ -40,20 +40,20 @@ IMAP can have a significant impact on the ZCS environment, particularly the amou
 |Total Users              |1000   |1000   |1000
 |Active Users             |600    |750    |900
 |Concurrent Users         |300    |500    |700
-| _Mailboxes_             |       |       |
+| *Mailboxes*             |       |       |
 |Mailbox Quota (GB)       |2      |5      |10
 |Avg. Mailbox Utilization |40%	   |50%    |60%
 |Avg. Mailbox Size (GB)   |0.8	   |2.5    |6.0
-|Incoming Mail            |       |       |		
+| *Incoming Mail*         |       |       |		
 |Average Msg. Size (KB)   |100	   |175	   |250
 |Msgs Per User Per Day    |25	    |50	    |75
-|Outgoing Mail            |       |       |	
+| *Outgoing Mail*         |       |       |	
 |Avg. Msg. Size (KB)      |100	   |175	   |250
 |Msgs Per User Per Day    |50	    |75	    |100
-|Peak Period              |       |       |		
+| *Peak Period*           |       |       |		
 |Peak Period (minutes)    |120	   |120    |120
 |% Msgs delivered         |30%    |50%	   |80%
-|Client Access Methods    |       |       |		
+| *Client Access Methods* |       |       |		
 |Webmail, ZCO	            |95%	   |95%	   |95%
 |POP	                     |10%	   |10%	   |10%
 |IMAP	                    |10%	   |25%	   |50%
