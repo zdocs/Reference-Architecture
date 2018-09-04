@@ -14,13 +14,23 @@ While SAN performance varies with the amount of cache allocated to volume groups
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
-|Disk RPM 	|Light	|Medium	|Heavy		
-|15000 (SAS)	|2	|4	|6
-|10000 (SAS)	|4	|6	|8
-|7200 (SATA)	|6	|8	|14
+|Disk RPM 	  |Light	|Medium	|Heavy		
+|15000 (SAS)	|2	    |4	    |6
+|10000 (SAS)	|4	    |6	    |8
+|7200 (SATA)	|6	    |8	    |14
 |===
 
 Since backups can represent high IOPs requirements and must be completed during non-business hours, adequate IOPs capacity (disk spindles) must be allocated to the backup partitions. The backup partition should be on a separate physical SAN environment or physical RAID group.
+
+== Minimum Number of Disk Spindles for Backup Partition (/opt/zimbra/backup)	
+
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Disk RPM 	 |Light	|Medium	|Heavy
+|15000 (SAS) |4	    |4	    |4
+|10000 (SAS) |4	    |6	    |6
+|7200 (SATA) |6	    |8	    |12
+|===
 
 VMware Storage Pools will be defined and allocated from SAN Storage for each server as defined below.
 
