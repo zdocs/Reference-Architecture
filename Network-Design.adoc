@@ -4,6 +4,8 @@
 
 Mail flow for customers with an external spam filtering system is shown below:
 
+image::images/Mail-Flow.png[Mail Flow, 800]
+
 == Host File
 The Host file for all the servers should include entries for all the ZCS servers. 
 
