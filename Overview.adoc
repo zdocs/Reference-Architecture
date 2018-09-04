@@ -1,3 +1,4 @@
+= Overview
 == Introduction and Scope
 
 This technical white paper describes the architecture for a Zimbra Collaboration Suite (ZCS) implementation based on typical usage patterns for Small to Medium Business (SMB) customers with approximately 1,000 users. It should not be used to extrapolate to larger deployments or beyond the parameters show in Table 1 of the Sizing Assumptions.  The configurations shown will work for physical and virtual server deployments. However, Zimbra recommends a virtualized deployment using vSphere for the SMB customer.
@@ -28,8 +29,8 @@ Installations of Zimbra in the SMB range may require support of split domain mai
 
 == Intended Audience
 This document is intended to be used by: 
-•	IT System Administrators with advanced-level Messaging experience
-•	Zimbra Partners
+* IT System Administrators with advanced-level Messaging experience
+* Zimbra Partners
 
 == Services to Be Deployed
 In most cases, services deployed on legacy email platforms must be supported on Zimbra. While not all deployments require all services, this architecture assumes you will need to support the following:
