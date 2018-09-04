@@ -27,7 +27,6 @@ For the recommended configuration, MTA and Proxy services are located in a secur
 
 === Internet to DMZ Firewall Ports Table	
 
-[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
 |Function	                                                   |Port  
 |SMTP to MTA from external mail servers                      |25    
