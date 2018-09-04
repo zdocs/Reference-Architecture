@@ -36,7 +36,7 @@ Sizing Data
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
 | Criteria      |Light  |Medium |Heavy
-| Users
+| Users         |       |       |
 | Total Users   | 1000	|1000	|1000
 | Active Users  | 600	|750	|900
 |===
