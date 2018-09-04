@@ -8,4 +8,45 @@ Mail flow for customers with an external spam filtering system is shown below:
 The Host file for all the servers should include entries for all the ZCS servers. 
 
 == External Connectivity – Load Balancer
-Load Balancers can manage connectivity to multiple Zimbra MTA/Proxy servers to improve uptime and distribute workloads in the ZCS deployment. Typically, a customer will create one or more A records that point to a Load Balancer IP address that represents the different network services offered by Zimbra such as POP3, IMAP, HTTPS, or SMTP. If you choose not to deploy a load balancer, you can use round-robin DNS with the A record pointing to each Zimbra MTA/Proxy server. This may result in a perception of downtime if one of the MTA/Proxy servers is taken offline for maintenance. The table below shows several examples of how customers may name the services they offer. A simple version of this would be to have all services reference the same name such as mail.customer.com
+Load Balancers can manage connectivity to multiple Zimbra MTA/Proxy servers to improve uptime and distribute workloads in the ZCS deployment. Typically, a customer will create one or more A records that point to a Load Balancer IP address that represents the different network services offered by Zimbra such as POP3, IMAP, HTTPS, or SMTP. If you choose not to deploy a load balancer, you can use round-robin DNS with the A record pointing to each Zimbra MTA/Proxy server. This may result in a perception of downtime if one of the MTA/Proxy servers is taken offline for maintenance. The table below shows several examples of how customers may name the services they offer. A simple version of this would be to have all services reference the same name such as mail.customer.com.
+
+Service Name	Process	Virtual IP:Port	Target Hosts
+
+webmail.customer.com	HTTPS	xxx.xxx.xxx.xxx:443	IP Address of Proxies
+pop.customercom	POP3	xxx.xxx.xxx.xxx:110	IP Address of Proxies
+imap.customer.com	IMAPS	xxx.xxx.xxx.xxx:993	IP Address of Proxies
+smtp.customer.com	SMTP	xxx.xxx.xxx.xxx:25	IP Address of Proxies
+
+== Firewall Port Configuration
+
+For the recommended configuration, MTA and Proxy services are located in a security zone that is exposed to the Internet and must handle connectivity to the outside world, typically called a DMZ. 
+
+LDAP, Mailbox, Archiving, and BES services are usually located inside the trusted corporate network (trusted). The following tables show the ports that must be opened from the outside to the DMZ and between the DMZ and trusted networks. Connecting from the Outside (Internet) to the DMZ (Proxy/MTA)
+
+=== Internet to DMZ Firewall Ports Table		
+Function	Port
+SMTP to MTA from external mail servers	25
+Connect to Zimbra Mail (if SSL offloaded by Load Balancer)	80
+POP to Proxy server	110
+IMAP to Proxy Server	143
+Connect to Zimbra Mail over HTTPS 	443
+IMAP SSL	993
+POP SSL	995
+
+Bidirectional between DMZ servers (Proxy/MTA) and Internal Servers (LDAP, Mailbox)
+
+=== DMZ to Trusted Firewall Ports Table	
+Function	Port
+SSH for Remote Server logs/Management	22
+SMTP from Mailbox server to MTA’s	25
+MTA to LDAP Authentication	389
+Syslogd from MTA to Mailbox server udp	514
+LMTP from MTA's to Mailbox Servers	7025
+Zimbra Administration	7071
+Zimbra Route Lookups (from Proxy to Mailbox)	7072
+Pop Proxy to Mailbox Servers	7110
+IMAP Proxy to Mailbox Servers	7143
+IMAP Proxy to Mailbox Servers (SSL)	7993
+POP Proxy to Mailbox Servers (SSL) 	7995
+
+*Note*: BES servers will need connectivity outbound to Blackberry Infrastructure on port 3101 and connect to VIP (mail.customer.com, which forwards to proxy server) on 80 or 443.
