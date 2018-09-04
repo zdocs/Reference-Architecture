@@ -29,13 +29,12 @@ Installations of Zimbra in the SMB range may require support of split domain mai
 * “Flash-cut” refers to moving all users from the legacy environment to Zimbra during the shortest time frame possible.
 
 == Intended Audience
-This document is intended to be used by: 
+This document is intended to be used by:
 * IT System Administrators with advanced-level Messaging experience
 * Zimbra Partners
 
 == Services to Be Deployed
 In most cases, services deployed on legacy email platforms must be supported on Zimbra. While not all deployments require all services, this architecture assumes you will need to support the following:
-
 * HTTPS
 * POP3
 * IMAP/IMAPS
