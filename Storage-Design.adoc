@@ -10,13 +10,15 @@ Customer should use Hierarchical Storage Management (HSM) in Zimbra. Secondary m
 
 While SAN performance varies with the amount of cache allocated to volume groups, a minimum number of spindles should be allocated to the volume groups used for the mailbox server in order to ensure adequate performance during normal loads.
 
-Table 2: Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)			
-Disk RPM 	Light	Medium	Heavy
-			
-15000 (SAS)	2	4	6
-10000 (SAS)	4	6	8
-7200 (SATA)	6	8	14
+== Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)	
 
+[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+|===
+|Disk RPM 	|Light	|Medium	|Heavy		
+|15000 (SAS)	|2	|4	|6
+|10000 (SAS)	|4	|6	|8
+|7200 (SATA)	|6	|8	|14
+|===
 
 Since backups can represent high IOPs requirements and must be completed during non-business hours, adequate IOPs capacity (disk spindles) must be allocated to the backup partitions. The backup partition should be on a separate physical SAN environment or physical RAID group.
 
