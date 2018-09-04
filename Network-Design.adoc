@@ -45,7 +45,7 @@ Bidirectional between DMZ servers (Proxy/MTA) and Internal Servers (LDAP, Mailbo
 
 [options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
 |===
-|Function	                                    |Port
+|Function	                                    |Port 
 |SSH for Remote Server logs/Management	      |22
 |SMTP from Mailbox server to MTA’s	          |25
 |MTA to LDAP Authentication	                  |389
