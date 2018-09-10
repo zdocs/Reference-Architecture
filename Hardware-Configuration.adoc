@@ -1,13 +1,16 @@
 = Role Based Server Hardware Configuration and Placement
 
-This Reference Architecture for 1,000 Users provides client access via a load balanced Virtual IP address through redundant servers located in an Internet-facing security zone, typically called a DMZ.  
+This Reference Architecture for 1,000 Users provides client access via a load balanced Virtual IP address through redundant servers located in an Internet-facing security zone, typically called a DMZ.
 
-MTA and Proxy services will be located on servers in the DMZ that are required to handle connectivity to the outside world. 
+MTA and Proxy services will be located on servers in the DMZ that are required to handle connectivity to the outside world.
 
 The proxy service will offload SSL traffic and proxy all HTTP, POP, and IMAP traffic to the mailbox store services.
 
-The Zimbra LDAP services will provide configuration information required to run the Zimbra Collaboration Suite.  Authentication Services can be provided by the Zimbra LDAP service, the customer’s Active Directory domain controllers, or an external LDAP service on a per domain basis. 
+The Zimbra LDAP services will provide configuration information required to run the Zimbra Collaboration Suite.  Authentication Services can be provided by the Zimbra LDAP service, the customer’s Active Directory domain controllers, or an external LDAP service on a per domain basis.
 
-The Mailbox Servers store email, calendar, address book, documents, and briefcase for each user. The Zimbra LDAP Servers, Mailbox Store Servers, and the Blackberry Enterprise Server (if required) will reside in the customer’s Internal Security Zone. 
+The Mailbox Servers store email, calendar, address book, documents, and briefcase for each user. The Zimbra LDAP Servers and the Mailbox Store Servers will reside in the customer’s Internal Security Zone.
 
-image::images/Server-Configuration-and-Placement.png[Server Configuration and Placement, 800]
+*`--> change the image quality .. needs to be redrawn`*
+
+.Server Configuration and Placement
+image::images/Server-Configuration-and-Placement.png[Server Configuration and Placement, 600]

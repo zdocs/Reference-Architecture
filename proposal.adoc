@@ -42,9 +42,9 @@ include::Archiving.adoc[]
 
 include::Integration.adoc[]
 
-<<<
-
-include::Glossary.adoc[]
+//<<<
+//
+//include::Glossary.adoc[]
 
 <<<
 
