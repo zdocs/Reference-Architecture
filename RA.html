@@ -542,11 +542,6 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#_role_based_server_hardware_configuration_and_placement">Role Based Server Hardware Configuration and Placement</a></li>
-<li><a href="#_virtualization_strategy">Virtualization Strategy</a>
-<ul class="sectlevel2">
-<li><a href="#_memory_allocation">Memory Allocation</a></li>
-</ul>
-</li>
 <li><a href="#_storage_design">Storage Design</a>
 <ul class="sectlevel2">
 <li><a href="#_iops_and_spindles">IOPS and Spindles</a></li>
@@ -984,27 +979,6 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 </div>
 </div>
 <div class="sect1">
-<h2 id="_virtualization_strategy">Virtualization Strategy</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>All Zimbra Servers should be installed as guest operating systems running on VMware vSphere version 4.1 or higher. Guest systems should be configured according to Zimbra recommendations for Virtual Servers, which can be found <a href="http://wiki.zimbra.com/wiki/Performance_Recommendations_for_Virtualizing_Zimbra_with_VMware_vSphere_4">here</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="_memory_allocation">Memory Allocation</h3>
-<div class="paragraph">
-<p>Memory performance is affected by the processor/memory architecture provided by your hardware vendor. Some vendors create NUMA (Non Uniform Memory Access) boundaries that assign 8 GB of RAM per processor, while others may have a NUMA boundary at 12 GB per processor.</p>
-</div>
-<div class="paragraph">
-<p>MTA/Proxy servers can usually function well with as little as 8 GB of RAM for all of the usage scenarios defined, but they function better with more memory. Mailbox servers that are also running LDAP services as shown should have a minimum of 16 GB of RAM and will require as much as 32 GB of RAM for the heavy usage scenario.</p>
-</div>
-<div class="paragraph">
-<p>If possible, allocate processors and memory along NUMA boundaries for each virtual machine. For example, if your hardware architecture has NUMA boundaries at 12 GB per processor, you might allocate 2 processors with 12 GB of RAM for each MTA/Proxy and 2 processors with 24 GB of RAM for your LDAP/Mailbox server. For a hardware architecture with NUMA boundaries at 8 GB, you might allocate 2 processors with 8 GB of RAM for each MTA/proxy server and 2 processors with 32 GB of RAM for your mailbox server.</p>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_storage_design">Storage Design</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1358,43 +1332,45 @@ Most Linux distributions use a default file system of ext3 with a 4096 byte bloc
 </div>
 <div class="sect3">
 <h4 id="_load_balancer_configuration_table">Load Balancer Configuration Table</h4>
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-all grid-rows" style="width: 80%;">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 29.1666%;">
+<col style="width: 20.8333%;">
+<col style="width: 20.8333%;">
+<col style="width: 29.1668%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Service Name</strong></th>
+<th class="tableblock halign-center valign-top"><strong>Process</strong></th>
+<th class="tableblock halign-center valign-top"><strong>Virtual IP:Port</strong></th>
+<th class="tableblock halign-center valign-top"><strong>Target Hosts</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Service Name</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Process</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Virtual IP:Port</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Target Hosts</strong></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">webmail.customer.com</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HTTPS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:443</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IP Address of Proxies</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">HTTPS</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:443</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">IP Address of Proxies</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pop.customercom</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">POP3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:110</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IP Address of Proxies</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">POP3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:110</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">IP Address of Proxies</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">imap.customer.com</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IMAPS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:993</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IP Address of Proxies</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">IMAPS</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:993</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">IP Address of Proxies</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">smtp.customer.com</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SMTP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:25</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">IP Address of Proxies</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SMTP</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">xxx.xxx.xxx.xxx:25</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">IP Address of Proxies</p></td>
 </tr>
 </tbody>
 </table>
@@ -1524,10 +1500,19 @@ Most Linux distributions use a default file system of ext3 with a 4096 byte bloc
 <h3 id="_ldap_servers">LDAP Servers</h3>
 <div class="paragraph">
 <p>ZCS requires a customized implementation OpenLDAP for directory Services. The version of OpenLDAP installed with Zimbra supports a Master/Replica Model. All writes to the directory must occur on the LDAP master. Writes are then pushed automatically to the LDAP replicas, which can be read by any Zimbra service. The customer’s implementation may include one master and optionally an LDAP replica server (if an archive server is installed separately), each installed as services on the mailbox servers and the archive server.
-In the event of a failure of the LDAP master, normal read operations of the directory will provide uninterrupted access to Zimbra users for basic operations. Operations that will be limited include password changes, configuration changes to domains, class of services, or accounts. If the LDAP Master is unrecoverable, customer’s IT staff will need to promote the LDAP replica to master status and rebuild a new LDAP replica. Zimbra has posted instructions for promoting an LDAP replica to an LDAP master here:</p>
+In the event of a failure of the LDAP master, normal read operations of the directory will provide uninterrupted access to Zimbra users for basic operations. Operations that will be limited include password changes, configuration changes to domains, class of services, or accounts. If the LDAP Master is unrecoverable, customer’s IT staff will need to promote the LDAP replica to master status and rebuild a new LDAP replica. Instructions for promoting an LDAP replica to an LDAP master can be found <a href="http://wiki.zimbra.com/index.php?title=Promoting_Replica_to_LDAP_Master">here</a>.</p>
 </div>
-<div class="paragraph">
-<p><a href="http://wiki.zimbra.com/index.php?title=Promoting_Replica_to_LDAP_Master" class="bare">http://wiki.zimbra.com/index.php?title=Promoting_Replica_to_LDAP_Master</a></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Add more information about MMR!
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1551,6 +1536,30 @@ In the event of a failure of the LDAP master, normal read operations of the dire
 <div class="sect1">
 <h2 id="_backup_storage_sizing">Backup Storage Sizing</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+More information about NG backup sizing should be added here. Mention retention and real-time feature.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This section talks about the legacy backup sizing.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Most customers require the ability to restore messages up to 30 days old from backup. This means there should be up to 5 weeks of email data.</p>
 </div>
@@ -1569,6 +1578,18 @@ In the event of a failure of the LDAP master, normal read operations of the dire
 <div class="sect1">
 <h2 id="_archiving_or_e_discovery">Archiving or E-discovery</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Do we really need to have this?
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Zimbra has the ability to archive all inbound and outbound messages for a designated mailbox to a separate archive mailbox. The Archiving and Discovery Zimlet will be installed on the mailbox server and the service will be enabled on the MTA/Proxy server to support archiving and discovery if this is required.</p>
 </div>
@@ -1582,7 +1603,7 @@ In the event of a failure of the LDAP master, normal read operations of the dire
 <p>When performing a gradual migration of email from legacy email systems to Zimbra, it is necessary to be able to host and route email between email servers during the migration period. Split Domain is the concept of routing mail between two different mail systems for the same domain. Both the legacy email systems and Zimbra will host email for accounts in the @customer.com email domain and will need to be able to route mail for users on the other system.</p>
 </div>
 <div class="paragraph">
-<p>For most implementations, the legacy mail system will act as the primary routing agent for inbound emails for the @customer.com email domain until the migration effort is complete. Configuration requirements are:</p>
+<p>For most implementations, the legacy mail system will act as the primary routing agent for inbound emails for the <em>@customer.com</em> email domain until the migration effort is complete. Configuration requirements are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1590,16 +1611,13 @@ In the event of a failure of the LDAP master, normal read operations of the dire
 <p>Legacy system should be configured with an address space of customer.com (and other necessary recipient domains) and a forwarding address of the IP address of the mail.customer.com VIP (Zimbra MTA server).</p>
 </li>
 <li>
-<p>The domain properties of customer.com on Zimbra should be modified to set zimbraMailTransport to smtp:legacyserver.customer.com:25
+<p>The domain properties of customer.com on Zimbra should be modified to set <code>zimbraMailTransport</code> to <code>smtp:legacyserver.customer.com:25</code>
 Outbound external email from Zimbra should be routed through the legacy system and relayed to the Spam filtering SMTP gateways. Inbound mail from the Internet to addresses hosted in Zimbra should be relayed by the spam filtering gateways through the legacy system to the Zimbra MTA. No configuration changes are required on spam filtering.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>For additional discussion, please see the following article:</p>
-</div>
-<div class="paragraph">
-<p><a href="http://wiki.zimbra.com/index.php?title=Split_Domain" class="bare">http://wiki.zimbra.com/index.php?title=Split_Domain</a></p>
+<p>For additional information, please see the following <a href="http://wiki.zimbra.com/index.php?title=Split_Domain">Split Domain article</a>.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1607,7 +1625,7 @@ Outbound external email from Zimbra should be routed through the legacy system a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-10 22:55:17 +08
+Last updated 2018-09-11 12:17:22 +08
 </div>
 </div>
 </body>

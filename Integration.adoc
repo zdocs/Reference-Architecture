@@ -2,13 +2,11 @@
 
 When performing a gradual migration of email from legacy email systems to Zimbra, it is necessary to be able to host and route email between email servers during the migration period. Split Domain is the concept of routing mail between two different mail systems for the same domain. Both the legacy email systems and Zimbra will host email for accounts in the @customer.com email domain and will need to be able to route mail for users on the other system.
 
-For most implementations, the legacy mail system will act as the primary routing agent for inbound emails for the @customer.com email domain until the migration effort is complete. Configuration requirements are:
+For most implementations, the legacy mail system will act as the primary routing agent for inbound emails for the _@customer.com_ email domain until the migration effort is complete. Configuration requirements are:
 
 * Legacy system should be configured with an address space of customer.com (and other necessary recipient domains) and a forwarding address of the IP address of the mail.customer.com VIP (Zimbra MTA server).
 
-* The domain properties of customer.com on Zimbra should be modified to set zimbraMailTransport to smtp:legacyserver.customer.com:25
+* The domain properties of customer.com on Zimbra should be modified to set `zimbraMailTransport` to `smtp:legacyserver.customer.com:25`
 Outbound external email from Zimbra should be routed through the legacy system and relayed to the Spam filtering SMTP gateways. Inbound mail from the Internet to addresses hosted in Zimbra should be relayed by the spam filtering gateways through the legacy system to the Zimbra MTA. No configuration changes are required on spam filtering.
 
-For additional discussion, please see the following article: 
-
-http://wiki.zimbra.com/index.php?title=Split_Domain
+For additional information, please see the following http://wiki.zimbra.com/index.php?title=Split_Domain[Split Domain article].

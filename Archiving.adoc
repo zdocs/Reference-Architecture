@@ -1,3 +1,6 @@
 = Archiving or E-discovery
 
+[NOTE]
+Do we really need to have this?
+
 Zimbra has the ability to archive all inbound and outbound messages for a designated mailbox to a separate archive mailbox. The Archiving and Discovery Zimlet will be installed on the mailbox server and the service will be enabled on the MTA/Proxy server to support archiving and discovery if this is required.

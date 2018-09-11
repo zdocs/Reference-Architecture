@@ -14,9 +14,9 @@ include::Sizing-Assumptions.adoc[]
 
 include::Hardware-Configuration.adoc[]
 
-<<<
-
-include::Virtualization-Strategy.adoc[]
+//<<<
+//
+//include::Virtualization-Strategy.adoc[]
 
 <<<
 
