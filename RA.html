@@ -548,9 +548,8 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#_storage_design">Storage Design</a>
-<ul class="sectlevel3">
-<li><a href="#_minimum_number_of_disk_spindles_for_primary_partition_store_index_db_redologtable">Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)	Table</a></li>
-<li><a href="#_minimum_number_of_disk_spindles_for_backup_partition_optzimbrabackuptable">Minimum Number of Disk Spindles for Backup Partition (/opt/zimbra/backup)	Table</a></li>
+<ul class="sectlevel2">
+<li><a href="#_iops_and_spindles">IOPS and Spindles</a></li>
 <li><a href="#_file_system_setup">File System Setup</a></li>
 <li><a href="#_proxymta_usable_storage">Proxy/MTA Usable Storage</a></li>
 <li><a href="#_mail_store">Mail Store</a></li>
@@ -958,19 +957,22 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 <h2 id="_role_based_server_hardware_configuration_and_placement">Role Based Server Hardware Configuration and Placement</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Reference Architecture for 1,000 Users provides client access via a load balanced Virtual IP address through redundant servers located in an Internet-facing security zone, typically called a DMZ.</p>
+<p>This reference architecture for 1,000 users provides client access via a load balanced Virtual IP address through redundant servers located in an Internet-facing security zone, typically called a DMZ.</p>
 </div>
 <div class="paragraph">
-<p>MTA and Proxy services will be located on servers in the DMZ that are required to handle connectivity to the outside world.</p>
+<p>MTA and Proxy services will be located in the DMZ that are required to handle connectivity to the outside world.</p>
 </div>
 <div class="paragraph">
-<p>The proxy service will offload SSL traffic and proxy all HTTP, POP, and IMAP traffic to the mailbox store services.</p>
+<p>The proxy service will offload SSL traffic and proxy all HTTP, POP, and IMAP traffic to the mailbox store services. Many customers also use the load-balancer as an SSL-offload and this helps improve performance.</p>
 </div>
 <div class="paragraph">
 <p>The Zimbra LDAP services will provide configuration information required to run the Zimbra Collaboration Suite.  Authentication Services can be provided by the Zimbra LDAP service, the customer’s Active Directory domain controllers, or an external LDAP service on a per domain basis.</p>
 </div>
 <div class="paragraph">
-<p>The Mailbox Servers store email, calendar, address book, documents, and briefcase for each user. The Zimbra LDAP Servers, Mailbox Store Servers, and the Blackberry Enterprise Server (if required) will reside in the customer’s Internal Security Zone.</p>
+<p>The Mailbox Servers store email, calendar, address book, documents, and briefcase for each user. The Zimbra LDAP Servers and the Mailbox Store Servers will reside in the customer’s Internal Security Zone.</p>
+</div>
+<div class="paragraph">
+<p><strong><code>-&#8594; change the image quality .. needs to be redrawn</code></strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1012,48 +1014,53 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 <p>Deployment of a SAN, while not required, provides the foundation for tools like vMotion to migrate virtual servers between physical servers and achieve High Availability goals. However, utilization of a SAN when used for multiple applications may create I/O contention and negatively impact Zimbra performance (i.e., if you have other applications running on the same SAN storage, it will negatively impact ZCS performance).</p>
 </div>
 <div class="paragraph">
-<p>Customers should allocate storage from the SAN for the primary message store, index storage, MySQL database storage, and redolog storage for mailbox servers. Zimbra binaries, log files, secondary message storage, and backups will be allocated from the same storage. For MTA/Proxy services, all software can be installed as part of the root partition on allocated virtual disk.</p>
+<p>Customers should allocate storage <em class="line-through">from the SAN</em> for the primary message store, index storage, MySQL database storage, and redolog storage for the mailbox servers. Zimbra binaries, log files, secondary message storage, and backups will be allocated from the same storage. For MTA/Proxy services, all software can be installed as part of the root partition on allocated virtual disk.</p>
 </div>
 <div class="paragraph">
-<p>Customer should use Hierarchical Storage Management (HSM) in Zimbra. Secondary message stores will be created on the SAN, configured as a separate datastore in VMware, and designated as the “current” secondary message store from the Zimbra Administration Console.  Secondary volumes can reside on lower costs, larger disks such as 750 GB 7200 RPM SATA drives.</p>
+<p>Customer should use Hierarchical Storage Management (HSM) in Zimbra. Secondary message stores will be created on the SAN, configured as a separate datastore in VMware, and designated as the “current” secondary message store from the Zimbra Administration Console.  Secondary volumes can reside on lower costs, larger disks such as 750GB 7200 RPM SATA drives.</p>
 </div>
 <div class="paragraph">
 <p>While SAN performance varies with the amount of cache allocated to volume groups, a minimum number of spindles should be allocated to the volume groups used for the mailbox server in order to ensure adequate performance during normal loads.</p>
 </div>
+<div class="paragraph">
+<p>With the latest versions, Zimbra also supports cloud based storage. Primary and Secondary volumes created with HSM NG can be hosted on S3 buckets, effectively moving the largest part of your data to secure and durable cloud storage.</p>
+</div>
+<div class="sect2">
+<h3 id="_iops_and_spindles">IOPS and Spindles</h3>
 <div class="sect3">
 <h4 id="_minimum_number_of_disk_spindles_for_primary_partition_store_index_db_redologtable">Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)	Table</h4>
 <table class="tableblock frame-all grid-rows" style="width: 60%;">
 <colgroup>
-<col style="width: 22.388%;">
-<col style="width: 17.9104%;">
-<col style="width: 37.3134%;">
-<col style="width: 22.3882%;">
+<col style="width: 20%;">
+<col style="width: 26.6666%;">
+<col style="width: 26.6666%;">
+<col style="width: 26.6668%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Disk RPM</th>
-<th class="tableblock halign-left valign-top">Light</th>
-<th class="tableblock halign-left valign-top">Medium</th>
+<th class="tableblock halign-center valign-top">Light</th>
+<th class="tableblock halign-center valign-top">Medium</th>
 <th class="tableblock halign-center valign-top">Heavy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">15000 (SAS)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10000 (SAS)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">7200 (SATA)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">14</p></td>
 </tr>
 </tbody>
@@ -1066,42 +1073,43 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 <h4 id="_minimum_number_of_disk_spindles_for_backup_partition_optzimbrabackuptable">Minimum Number of Disk Spindles for Backup Partition (/opt/zimbra/backup)	Table</h4>
 <table class="tableblock frame-all grid-rows" style="width: 60%;">
 <colgroup>
-<col style="width: 22.388%;">
-<col style="width: 17.9104%;">
-<col style="width: 37.3134%;">
-<col style="width: 22.3882%;">
+<col style="width: 20%;">
+<col style="width: 26.6666%;">
+<col style="width: 26.6666%;">
+<col style="width: 26.6668%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Disk RPM</th>
-<th class="tableblock halign-left valign-top">Light</th>
-<th class="tableblock halign-left valign-top">Medium</th>
+<th class="tableblock halign-center valign-top">Light</th>
+<th class="tableblock halign-center valign-top">Medium</th>
 <th class="tableblock halign-center valign-top">Heavy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">15000 (SAS)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10000 (SAS)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">7200 (SATA)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">12</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p>VMware Storage Pools will be defined and allocated from SAN Storage for each server as defined below.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1117,11 +1125,11 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 </div>
 <div class="paragraph">
 <p>All should be created with the minimum following ext3 options:
--j -O dir_index -J size=400 -m 2 -b 4096 –L &lt; label name &gt;</p>
+<code>-j -O dir_index -J size=400 -m 2 -b 4096 –L &lt; label name &gt;</code></p>
 </div>
 <div class="paragraph">
 <p>The following tune2fs options should be altered to prevent FS checks on reboot:
--c 0 -i 0</p>
+<code>-c 0 -i 0</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -1139,16 +1147,16 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 <h4 id="_mtaproxy_storage_table">MTA/Proxy Storage Table</h4>
 <table class="tableblock frame-all grid-rows" style="width: 60%;">
 <colgroup>
-<col style="width: 22.388%;">
-<col style="width: 17.9104%;">
-<col style="width: 37.3134%;">
-<col style="width: 22.3882%;">
+<col style="width: 43.75%;">
+<col style="width: 18.75%;">
+<col style="width: 18.75%;">
+<col style="width: 18.75%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Criteria</th>
 <th class="tableblock halign-left valign-top">Light</th>
-<th class="tableblock halign-left valign-top">Medium</th>
+<th class="tableblock halign-center valign-top">Medium</th>
 <th class="tableblock halign-center valign-top">Heavy</th>
 </tr>
 </thead>
@@ -1156,31 +1164,31 @@ In this architecture, the ZCS MTA Service will provide MTA, Anti-virus, and Anti
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spool</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Est. Spool Size Requirements Per Day (GB) Per MTA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">45</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">45</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">60</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">OS/ZCS/Logs</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Est. Other Requirements Per MTA (GB)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">45</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">45</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">60</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total Disk Space Recommended Per MTA</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>60</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>90</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>90</strong></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong>120</strong></p></td>
 </tr>
 </tbody>
@@ -1209,66 +1217,66 @@ Most Linux distributions use a default file system of ext3 with a 4096 byte bloc
 <h4 id="_mailstore_storage_mb_table">Mailstore Storage (MB) Table</h4>
 <table class="tableblock frame-all grid-rows" style="width: 60%;">
 <colgroup>
-<col style="width: 22.388%;">
-<col style="width: 17.9104%;">
-<col style="width: 37.3134%;">
-<col style="width: 22.3882%;">
+<col style="width: 43.75%;">
+<col style="width: 18.75%;">
+<col style="width: 18.75%;">
+<col style="width: 18.75%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Criteria</th>
-<th class="tableblock halign-left valign-top">Light</th>
-<th class="tableblock halign-left valign-top">Medium</th>
+<th class="tableblock halign-center valign-top">Light</th>
+<th class="tableblock halign-center valign-top">Medium</th>
 <th class="tableblock halign-center valign-top">Heavy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">50</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">50</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">50</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/store</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">120</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">370</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">120</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">370</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">880</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/store2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">670</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2080</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">670</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2080</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">4990</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/db</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">40</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">130</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">40</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">130</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">300</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/index</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">620</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">620</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">1470</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/redolog</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">80</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">250</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">80</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">250</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">590</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/backup (separate physical hardware)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1630</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5080</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1630</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5080</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">12190</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2790</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>8580</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>2790</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>8580</strong></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong>20470</strong></p></td>
 </tr>
 </tbody>
@@ -1284,36 +1292,36 @@ Most Linux distributions use a default file system of ext3 with a 4096 byte bloc
 <h4 id="_archive_storage_mb_table">Archive Storage (MB) Table</h4>
 <table class="tableblock frame-all grid-rows" style="width: 60%;">
 <colgroup>
-<col style="width: 22.388%;">
-<col style="width: 17.9104%;">
-<col style="width: 37.3134%;">
-<col style="width: 22.3882%;">
+<col style="width: 43.75%;">
+<col style="width: 18.75%;">
+<col style="width: 18.75%;">
+<col style="width: 18.75%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Criteria</th>
-<th class="tableblock halign-left valign-top">Light</th>
-<th class="tableblock halign-left valign-top">Medium</th>
+<th class="tableblock halign-center valign-top">Light</th>
+<th class="tableblock halign-center valign-top">Medium</th>
 <th class="tableblock halign-center valign-top">Heavy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3617</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10212</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3617</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10212</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">22034</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">/opt/zimbra/backup (separate physical hardware)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3609</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10205</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3609</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10205</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">22027</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>7226</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>20417</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>7226</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>20417</strong></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong>44061</strong></p></td>
 </tr>
 </tbody>

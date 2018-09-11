@@ -1,20 +1,23 @@
 = Storage Design
 
-Disk operations traditionally represent the bottleneck for performance in the Zimbra environment and have the biggest impact on the user experience. Since email is write intensive, dedicated, high performance drives in RAID 1 or RAID 1+0 configurations typically provide the best throughput.  
+Disk operations traditionally represent the bottleneck for performance in the Zimbra environment and have the biggest impact on the user experience. Since email is write intensive, dedicated, high performance drives in RAID 1 or RAID 1+0 configurations typically provide the best throughput.
 
-Deployment of a SAN, while not required, provides the foundation for tools like vMotion to migrate virtual servers between physical servers and achieve High Availability goals. However, utilization of a SAN when used for multiple applications may create I/O contention and negatively impact Zimbra performance (i.e., if you have other applications running on the same SAN storage, it will negatively impact ZCS performance).  
+Deployment of a SAN, while not required, provides the foundation for tools like vMotion to migrate virtual servers between physical servers and achieve High Availability goals. However, utilization of a SAN when used for multiple applications may create I/O contention and negatively impact Zimbra performance (i.e., if you have other applications running on the same SAN storage, it will negatively impact ZCS performance).
 
-Customers should allocate storage from the SAN for the primary message store, index storage, MySQL database storage, and redolog storage for mailbox servers. Zimbra binaries, log files, secondary message storage, and backups will be allocated from the same storage. For MTA/Proxy services, all software can be installed as part of the root partition on allocated virtual disk.
+Customers should allocate storage [.line-through]_from the SAN_ for the primary message store, index storage, MySQL database storage, and redolog storage for the mailbox servers. Zimbra binaries, log files, secondary message storage, and backups will be allocated from the same storage. For MTA/Proxy services, all software can be installed as part of the root partition on allocated virtual disk.
 
-Customer should use Hierarchical Storage Management (HSM) in Zimbra. Secondary message stores will be created on the SAN, configured as a separate datastore in VMware, and designated as the “current” secondary message store from the Zimbra Administration Console.  Secondary volumes can reside on lower costs, larger disks such as 750 GB 7200 RPM SATA drives.
+Customer should use Hierarchical Storage Management (HSM) in Zimbra. Secondary message stores will be created on the SAN, configured as a separate datastore in VMware, and designated as the “current” secondary message store from the Zimbra Administration Console.  Secondary volumes can reside on lower costs, larger disks such as 750GB 7200 RPM SATA drives.
 
 While SAN performance varies with the amount of cache allocated to volume groups, a minimum number of spindles should be allocated to the volume groups used for the mailbox server in order to ensure adequate performance during normal loads.
 
+With the latest versions, Zimbra also supports cloud based storage. Primary and Secondary volumes created with HSM NG can be hosted on S3 buckets, effectively moving the largest part of your data to secure and durable cloud storage.
+
+== IOPS and Spindles
 === Minimum Number of Disk Spindles for Primary Partition (store, index, db, redolog)	Table
 
-[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+[options="header",cols="15,^20,^20,^20", frameset="topbot", grid="rows", width="60%"]
 |===
-|Disk RPM 	  |Light	|Medium	|Heavy		
+|Disk RPM 	  |Light	|Medium	|Heavy
 |15000 (SAS)	|2	    |4	    |6
 |10000 (SAS)	|4	    |6	    |8
 |7200 (SATA)	|6	    |8	    |14
@@ -24,7 +27,7 @@ Since backups can represent high IOPs requirements and must be completed during 
 
 === Minimum Number of Disk Spindles for Backup Partition (/opt/zimbra/backup)	Table
 
-[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+[options="header",cols="15,^20,^20,^20", frameset="topbot", grid="rows", width="60%"]
 |===
 |Disk RPM 	 |Light	|Medium	|Heavy
 |15000 (SAS) |4	    |4	    |4
@@ -43,10 +46,10 @@ http://wiki.zimbra.com/index.php?title=Performance_Tuning_Guidelines_for_Large_D
 All the Zimbra mount-points should be mounted with the options –noatime.
 
 All should be created with the minimum following ext3 options:
--j -O dir_index -J size=400 -m 2 -b 4096 –L < label name >
+`-j -O dir_index -J size=400 -m 2 -b 4096 –L < label name >`
 
 The following tune2fs options should be altered to prevent FS checks on reboot:
--c 0 -i 0
+`-c 0 -i 0`
 
 == Proxy/MTA Usable Storage
 
@@ -54,16 +57,16 @@ The Spool Directory of the MTA/Proxy Servers has to be sized to account for pote
 
 Additional Disk Space must be allocated for OS files, ZCS, and log files. All OS, ZCS, logs, and data files can reside on the same partition. Since this is the most write intensive component of ZCS, the partition should be allocated on the fastest drives.
 
-The following table shows estimated disk requirements for the MTA/Proxy Servers. 
+The following table shows estimated disk requirements for the MTA/Proxy Servers.
 
 === MTA/Proxy Storage Table
 
-[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+[options="header",cols="35,15,^15,^15", frameset="topbot", grid="rows", width="60%"]
 |===
 |Criteria	                                          |Light	     |Medium	     |Heavy
-|                                                   |Spool       |             |	
+|                                                   |Spool       |             |
 |Est. Spool Size Requirements Per Day (GB) Per MTA	|30	         |45	         |60
-|                                                   |OS/ZCS/Logs |             |		
+|                                                   |OS/ZCS/Logs |             |
 |Est. Other Requirements Per MTA (GB)	              |30	         |45	         |60
 |*Total Disk Space Recommended Per MTA*             |*60*	       |*90*	       |*120*
 |===
@@ -72,10 +75,10 @@ The following table shows estimated disk requirements for the MTA/Proxy Servers.
 
 Mailbox server storage can be created on a single partition (/opt/zimbra) or on multiple partitions. The benefit of having it on multiple partitions is that you are able to customize the configuration (RAID levels, file system types, etc.) based on optimization requirements, and the Zimbra Stats can provide detailed information by partition used in troubleshooting potential performance bottlenecks. The minimum partition segregation should at least be /opt/zimbra and /opt/zimbra/backup with the backup partition on separate physical hardware.
 
-Another factor to consider is the use of Hierarchical Storage Management (HSM) that is part of the ZCS Network Edition. HSM allows you to put older, less frequently accessed email on slower, less expensive storage. The split between primary and secondary storage is configurable in the ZCS Admin Console.  
+Another factor to consider is the use of Hierarchical Storage Management (HSM) that is part of the ZCS Network Edition. HSM allows you to put older, less frequently accessed email on slower, less expensive storage. The split between primary and secondary storage is configurable in the ZCS Admin Console.
 
 In the example shown below, it is assumed that /opt/zimbra/store2 is the secondary storage.  If you do not plan to use secondary storage, create /opt/zimbra/store with the total disk space of /opt/zimbra/store and /opt/zimbra/store2 combined.
-Most Linux distributions use a default file system of ext3 with a 4096 byte block size. If ext4 is available with an 8192 byte block size, this should reduce IO load and improve overall system performance. Using other file system types can be risky and is not recommended for this size implementation.  
+Most Linux distributions use a default file system of ext3 with a 4096 byte block size. If ext4 is available with an 8192 byte block size, this should reduce IO load and improve overall system performance. Using other file system types can be risky and is not recommended for this size implementation.
 
 RAID 1 or RAID 1+0 is recommended for all partitions except the backup partition where RAID 5 is acceptable.
 
@@ -83,7 +86,7 @@ Important: DO NOT use direct NFS file systems for the db (mysql data) or /opt/zi
 
 === Mailstore Storage (MB) Table
 
-[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+[options="header",cols="35,^15,^15,^15", frameset="topbot", grid="rows", width="60%"]
 |===
 |Criteria	                                         |Light	  |Medium	  |Heavy
 |/opt/zimbra	                                     |50	    |50	      |50
@@ -100,9 +103,9 @@ Important: DO NOT use direct NFS file systems for the db (mysql data) or /opt/zi
 Since Archiving is simply a message repository and does not support day-to-day user activity, separation of disk partitions is not necessary. The calculations here assume 365 days of data stored on the archive server. RAID 5 can be used on slower disks.
 
 === Archive Storage (MB) Table
-[options="header",cols="15,12,25,^15", frameset="topbot", grid="rows", width="60%"]
+[options="header",cols="35,^15,^15,^15", frameset="topbot", grid="rows", width="60%"]
 |===
-|Criteria	                                        |Light	  |Medium	   |Heavy			
+|Criteria	                                        |Light	  |Medium	   |Heavy
 |/opt/zimbra	                                    |3617	    |10212	   |22034
 |/opt/zimbra/backup (separate physical hardware)	|3609	    |10205	   |22027
 |*Total*                                          |*7226*	  |*20417*	 |*44061*
