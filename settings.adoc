@@ -9,7 +9,12 @@
 :showlinks:
 :source-highlighter: coderay
 :toc: left
-:experimental:
 :product-version: 8.8
 :product-release-date: Sep, 2018
 :copyright-year: 2018
+
+:experimental:
+:checkedbox: {startsb}&#10003;{endsb}
+:uncheckedbox: {startsb}&#10007;{endsb}
+:chk: icon:check[]
+:y: &#10003;

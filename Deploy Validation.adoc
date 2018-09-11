@@ -1,0 +1,74 @@
+= Deployment Validation Checklist
+
+== Overview
+
+The goal of the Deployment Validation Checklist is to:
+
+*	Confirm that the Zimbra deployment meets the Architectural requirements.
+
+The Deployment Validation Checklist should be completed by the following Team Members:
+
+*	Technical Lead (Customer and/or Partner)
+*	Project Manager (Customer and Partner)
+
+The Deployment Validation Checklist will require 1 day to complete, and it should be completed during the Deployment Phase.
+
+== Deployment Validation Checklist
+
+[options="header",cols="^5,55a,^15,^15,^15", frameset="topbot", grid="cols", width="100%"]
+|===
+| |Item |% Complete |Estimated Completion Date |Completion Date
+|+++<input type="checkbox">+++
+|Login as test users to the environment (Test Lab & Production) | | |
+
+|+++<input type="checkbox">+++
+|Exercise all use cases for mail routing
+
+* Phased Migration
+** Internet to Legacy Environment
+** Internet to Zimbra
+** Legacy Environment to Zimbra
+** Legacy Environment to Internet
+** Zimbra to Internet
+** Zimbra to Legacy Environment
+** Zimbra to Zimbra
+** Legacy Environment to Legacy Environment
+* Flash-Cut Migration
+** Internet to Zimbra
+** Zimbra to Internet
+** Zimbra to Zimbra | | |
+
+|+++<input type="checkbox">+++
+|Confirm security policies have been implemented | | |
+
+|+++<input type="checkbox">+++
+|Confirm client connectivity | | |
+
+|+++<input type="checkbox">+++
+|Confirm mobile device connectivity | | |
+
+|+++<input type="checkbox">+++
+|Verify that logging is occurring | | |
+
+|+++<input type="checkbox">+++
+|Verify third-party integrated system functionality (provisioning, HR, Finance, Engineering, Sales, etc.) | | |
+
+|+++<input type="checkbox">+++
+|Validate restores from backup | | |
+
+|+++<input type="checkbox">+++
+|Validate monitoring | | |
+
+|+++<input type="checkbox">+++
+|Validate High Availability* | | |
+
+|+++<input type="checkbox">+++
+|Validate that used access methods work, including proxy login | | |
+
+|+++<input type="checkbox">+++
+|Validate SSO (if used) | | |
+
+|+++<input type="checkbox">+++
+|Validate that maximum email size is appropriate | | |
+
+|===

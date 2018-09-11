@@ -1,0 +1,77 @@
+= Pre-Deployment Checklist
+
+== Overview
+
+The goal of this Pre-Deployment Checklist is to
+
+* Establish the technical foundation for Zimbra deployment.
+
+The Pre-Deployment Checklist should be completed by the following Team Members:
+
+*	Technical Lead (Customer and/or Partner)
+*	Project Manager (Customer and Partner)
+
+The Pre-Deployment Checklist will require 2-4 weeks to complete, and it should be completed during the Deployment Phase. 
+
+== Pre-Deployment Checklist
+
+[options="header",cols="^5,55,^15,^15,^15", frameset="topbot", grid="cols", width="100%"]
+|===
+| |Item |% Complete |Estimated Completion Date |Completion Date
+|+++<input type="checkbox">+++
+ a| Confirm that the Project Manager has signed-off on the Reference Architecture | | |
+|+++<input type="checkbox">+++
+ a| Confirm that the Project Manager has signed-off on the Project Plan (including Task Assignments) | | |
+|+++<input type="checkbox">+++
+ a| Confirm that Partner has validated sizing estimate (for Zimbra PS) | | |
+|+++<input type="checkbox">+++
+ a| Confirm that the Hardware is installed and configured | | |
+|+++<input type="checkbox">+++
+ a| Confirm that the expected OS is installed with the latest patches | | |
+|+++<input type="checkbox">+++
+ a| Verify that the storage has been configured in accordance with the Zimbra recommendations for disk layout | | |
+a|+++<input type="checkbox">+++
+ a| Confirm that networking has been configured:
+
+* All servers are able to ping each other on the correct IP address
+* The DNS produces the right lookup values for A records and MX records | | |
+|+++<input type="checkbox">+++
+ a| Verify that Installation Engineer has “root” access to the server | | |
+|+++<input type="checkbox">+++
+ a| Confirm that firewall ports are configured properly.
+
+Verify that you can connect (telnet) from the Internet to the following ports:
+
+* SMTP:25
+* HTTP:80 or HTTPS:443
+* IMAP:143 or IMAPS:995
+* POP:110 or POPS:993
+
+Verify that you cannot connect (telnet) from the Internet to the following ports:
+
+* LDAP:389
+* Zimbra Route Handler: 7072
+* LMTP:7025
+
+If using a proxy environment, verify that the DMZ zone (Proxy and MTA Servers) can connect to the Internal zone (mailbox and LDAP servers) on these ports:
+
+* LDAP: 389
+* Syslogd:514 (udp)
+* Zimbra Route Lookup:7072
+* LMTP:7025
+* IMAP: 7142 or IMAPS:7995
+* POP: 7110 or POPS:7993
+* HTTP: 8080 or HTTPS:8443
+* Proxy admin port: 9071
+
+If using a Proxy Environment  with Proxy Servers in both the DMZ and internal zones:
+
+* Memcached: 11211
+
+Verify that the Internal zone (mailbox and LDAP servers) can connect to the DMZ zone (Proxy and MTA Servers) on these ports:
+
+* SSH:22
+* SMTP:25 | | |
+|+++<input type="checkbox">+++
+ a| Confirm Zimbra license is available | | |
+|===

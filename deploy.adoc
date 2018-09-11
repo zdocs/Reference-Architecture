@@ -1,0 +1,23 @@
+include::settings.adoc[]
+
+:leveloffset: +1
+
+<<<
+
+include::Pre-Deploy Check.adoc[]
+
+<<<
+
+include::Deploy Check.adoc[]
+
+<<<
+
+include::Deploy Validation.adoc[]
+
+<<<
+
+include::Integration Check.adoc[]
+
+<<<
+
+:leveloffset: -1

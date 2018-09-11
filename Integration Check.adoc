@@ -1,0 +1,68 @@
+= Integration & Branding Checklist
+
+== Overview
+
+The goal of the Integration & Branding Checklist is to:
+
+*	Review all Zimbra integration and branding with external systems.
+
+The Integration & Branding Checklist should be completed by the following Team Members:
+
+*	Technical Lead (Customer and/or Partner)
+*	Project Manager (Customer and Partner)
+
+The Integration & Branding Checklist will require 2 days to complete, and it should be completed during the Integration & Branding Phase.
+
+[options="header",cols="^5,55a,^15,^15,^15", frameset="topbot", grid="cols", width="100%"]
+|===
+| |Item |% Complete |Estimated Completion Date |Completion Date
+
+|
+4+|Integration
+
+|+++<input type="checkbox">+++
+| Confirm that users are provisioned correctly (added to and deleted from Zimbra) from the external system. | | |
+
+|+++<input type="checkbox">+++
+|Confirm that authentication against External Directory (AD or LDAP) works as expected | | |
+
+|+++<input type="checkbox">+++
+|Confirm that users who are NOT in the External Directory cannot log in to Zimbra | | |
+
+|+++<input type="checkbox">+++
+|Confirm that Single Sign-On is working as expected (optional based on Customer requirements) | | |
+
+|+++<input type="checkbox">+++
+|Verify that the correct Global Address List (GAL) is displayed when sending an email message. If multiple GAL’s are defined, users from all GAL’s should appear in the To: field when sending an email. | | |
+
+|+++<input type="checkbox">+++
+|Verify that free/busy information for users on Zimbra is viewable to users on Exchange | | |
+
+|+++<input type="checkbox">+++
+|Verify that free/busy information is updated properly | | |
+
+|
+4+|Branding
+
+|+++<input type="checkbox">+++
+|Verify that the logo on the login page appears correctly | | |
+
+|+++<input type="checkbox">+++
+|Verify that the logo in the upper left-hand corner or the application appears correctly | | |
+
+|+++<input type="checkbox">+++
+|Verify that the colors in the skin are correct | | |
+
+|+++<input type="checkbox">+++
+|Confirm that the user can change the skin (theme) | | |
+
+|+++<input type="checkbox">+++
+|Verify that all approved Zimlets are deployed | | |
+
+|+++<input type="checkbox">+++
+|Verify that users cannot disable Zimlets that should be mandatory for each Class of Service | | |
+
+|+++<input type="checkbox">+++
+|Confirm that external applications can send email through Zimbra | | |
+
+|===

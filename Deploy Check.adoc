@@ -1,0 +1,77 @@
+= Deployment Checklist
+
+== Overview
+
+The goal of the Deployment Checklist is to:
+
+*	Deploy a functional Zimbra environment.
+
+The Deployment Checklist should be completed by the following Team Member(s):
+
+*	Technical Lead (Customer and/or Partner)
+
+The Deployment Checklist will require up to 3 days to complete, and it should be completed during the Deployment Phase.
+
+== Deployment Checklist
+
+[options="header",cols="^5,55a,^15,^15,^15", frameset="topbot", grid="cols", width="100%"]
+|===
+| |Item |% Complete |Estimated Completion Date |Completion Date
+|+++<input type="checkbox">+++
+|Deploy to the Test Lab in accordance with the Zimbra Multi Server Installation Guide | | |
+
+|+++<input type="checkbox">+++
+|Deploy to the Production environment in accordance with the Zimbra Multi Server Installation Guide | | |
+
+|+++<input type="checkbox">+++
+|Apply branding as required (logos, approved Zimlets, skins, etc.) | | |
+
+|+++<input type="checkbox">+++
+|Apply tuning parameters for the environment | | |
+
+|+++<input type="checkbox">+++
+|Configure test accounts | | |
+
+|+++<input type="checkbox">+++
+|Configure authentication | | |
+
+|+++<input type="checkbox">+++
+|Configure GAL | | |
+
+|+++<input type="checkbox">+++
+|Create administrative groups/users | | |
+
+|+++<input type="checkbox">+++
+|Create COS to reflect functional groups | | |
+
+|+++<input type="checkbox">+++
+|Create additional domains as required | | |
+
+|+++<input type="checkbox">+++
+|Configure Remote Logging | | |
+
+|+++<input type="checkbox">+++
+|Apply Global Settings | | |
+
+|+++<input type="checkbox">+++
+|Configure backup schedule | | |
+
+|+++<input type="checkbox">+++
+|Configure email destination for backup reports, update notices, and daily reports | | |
+
+|+++<input type="checkbox">+++
+|Configure and setup Client  access, proxy login, SSO (if needed) | | |
+
+|+++<input type="checkbox">+++
+|Configure SMTP Auth if needed | | |
+
+|+++<input type="checkbox">+++
+|Configure Mail Routing in accordance to the System Design | | |
+
+|+++<input type="checkbox">+++
+|Integrate External Edge MTA, AV/AS (if used) | | |
+
+|+++<input type="checkbox">+++
+|Install commercial SSL certificate (if necessary for Customer requirements) | | |
+
+|===
