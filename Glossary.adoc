@@ -120,7 +120,7 @@ Technology used in the Zimbra Web Client.
 
 *Zimbra administration console*: The Zimbra administrator interface.
 
-*Zimbra Collaboration Suite (ZCS)*: Enterprise-class open source email, calendar and collaboration server.
+*Zimbra Collaboration Server (ZCS)*: Enterprise-class open source email, calendar and collaboration server.
 
 *Zimbra Connector for Outlook (ZCO)*: Provides real time, two-way synchronization of mail, contacts, tasks, and calendar between Outlook and the Zimbra server.
 
