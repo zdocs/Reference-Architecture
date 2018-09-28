@@ -60,7 +60,7 @@ The Deployment Validation Checklist will require 1 day to complete, and it shoul
 |Validate monitoring | | |
 
 |+++<input type="checkbox">+++
-|Validate High Availability* | | |
+|Validate High Availability | | |
 
 |+++<input type="checkbox">+++
 |Validate that used access methods work, including proxy login | | |
